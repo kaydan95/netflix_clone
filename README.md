@@ -1,6 +1,6 @@
 # :popcorn: Netflix_Clone [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-<img src="https://user-images.githubusercontent.com/85853145/163539465-146fd13e-bfa9-4e7c-bbcb-763c952a49cf.png" width="1000" height="550">
+<img src="https://user-images.githubusercontent.com/85853145/163539465-146fd13e-bfa9-4e7c-bbcb-763c952a49cf.png" width="1000" height="500">
 
 ## Summary / 요약
 
