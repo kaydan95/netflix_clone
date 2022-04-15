@@ -125,6 +125,7 @@ useEffect(() => {
 ```
 
 ### 2. Detail Modal
+- 정리해서 추가예정!!!
 
 ## Publish / 배포 😌
 - 개인적인 API 키가 포함된 부분은 `dotenv`를 이용해서 `gitignore` 로 처리해준 뒤 깃허브페이지에 배포완료.!
