@@ -1,46 +1,25 @@
-# Getting Started with Create React App
+# :popcorn: Netflix_Clone [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="https://user-images.githubusercontent.com/85853145/163539465-146fd13e-bfa9-4e7c-bbcb-763c952a49cf.png" width="1000" height="550">
 
-## Available Scripts
+## Summary / 요약
 
-In the project directory, you can run:
+- **목적** : NomadCoders React강의 일부 및 다양한 라이브러리 연습
+- **라이브러리 종류** : react-query / styled-components / framer-motion / react-router
+- **메인 개발 환경** : React / Typescript / JavaScript
+- **Data Api** : [The Movie Database Api](https://developers.themoviedb.org/3/getting-started/introduction)
+- **Publish** : [넷플릭스_클론](https://kaydan95.github.io/)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## For Start / 시작하기 전에
+    npm install react-router-dom@6
+    npm install --save styled-components
+    npm i -D @types/styled-components
+    npm install react-query
+    npm install react-helmet
+    npm install recoil
+    npm install framer_motion
+    npm install react-player
+    npm install react-responsive
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Features / 특징..?
