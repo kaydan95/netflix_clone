@@ -8,7 +8,7 @@
 - **라이브러리 종류** : react-query / styled-components / framer-motion / react-router
 - **메인 개발 환경** : React / Typescript / JavaScript
 - **Data Api** : [The Movie Database Api](https://developers.themoviedb.org/3/getting-started/introduction)
-- **Publish** : [넷플릭스_클론](https://kaydan95.github.io/)
+- **Publish** : [넷플릭스_클론](https://kaydan95.github.io/netflix_clone/)
 
 
 ## For Start / 시작하기 전에
