@@ -12,7 +12,6 @@ import ClickedMovieDetailInfo from '../Components/ClickedMovieDetailInfo';
 import ClickedTvDetailInfo from '../Components/ClickedTvDetailInfo';
 
 const SearchWrapper = styled.div`
-    border : 1px solid white;
     display : flex;
     padding : 100px 50px;
     width : 100%;
