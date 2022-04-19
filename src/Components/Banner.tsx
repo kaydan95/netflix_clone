@@ -198,7 +198,6 @@ function Banner() {
     // 영상 끝나면 poster 보여주기
     const [endPlaying, setEndPlaying] = useState(false);
     const afterEnded = () => {
-        console.log(showOverview);
         setShowOverview(true);
         setEndPlaying(true);
     };
