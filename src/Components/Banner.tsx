@@ -242,7 +242,7 @@ function Banner() {
         <BannerWrapper play={endPlaying}>
             <ReactPlayer
                 className="react-player" 
-                url={makeClip(clipValue?.results[1].key || "")}
+                url={makeClip(clipValue?.results[0].key || "")}
                 width={'100%'}
                 height={'100%'}
                 playing={true}
