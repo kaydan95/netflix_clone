@@ -232,7 +232,10 @@ function ClickedTvDetailInfo() {
         }
     }
 
-    const overlayClicked = () => navigate("/");
+    const overlayClicked = () => {
+        setCurrentSeason(1);
+        navigate("/");
+    };
 
     const TvWriters = TvCredit?.crew?.filter((tvWriter) => {
         if(tvWriter.department === "Writing" || tvWriter.known_for_department === "Writing"){
