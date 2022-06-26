@@ -9,6 +9,7 @@
 - **메인 개발 환경** : React / Typescript / JavaScript
 - **Data Api** : [The Movie Database Api](https://developers.themoviedb.org/3/getting-started/introduction)
 - **Publish** : [넷플릭스_클론](https://kaydan95.github.io/netflix_clone/)
+- **프로젝트 정리노트** : [넷플릭스_클론 프로젝트 정리노트](https://www.notion.so/Netflix_clone-d45cb519d6384de3b7accb2295ab33eb)
 
 
 ## For Start / 시작하기 전에
