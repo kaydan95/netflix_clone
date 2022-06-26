@@ -26,6 +26,8 @@
 
 ## Features / 최대한 똑같이 만들어보기위한 몸부림..!
 ### 1. Banner 
+
+ 
 #### 1. 들어가자마자 Banner 에는 영상이 재생
 - react-player라는 신세계를 만난 시점. 여러 함수가 내장되어있어서 컨트롤 하기도 편했다. 다만 플레이어 크기가 유튜브 영상크기 기준으로 되어있어서 해당 영상 부분의 scale을 1.3 정도로 높여 실제 넷플릭스의 배너처럼 꽉 차보이게 만들었다.
 - 따로 `util.ts` 파일을 만들어 안에 clip을 만들 함수를 정의했다. 이 과정에서 CORS 정책때문에 오류가 떠서 clip 만드는 부분에 임시 방편으로 우회 url 을 덧붙여 해결.
@@ -129,8 +131,13 @@ useEffect(() => {
 ### 2. Detail Modal
 - 해당 프로젝트에서 구현된 페이지는 애초에 TV 시리즈와 영화의 구분이 없이 한꺼번에 모든 정보를 볼 수 있도록 되어있는 곳이기 때문에 해당 박스에 hover 했을때, 그리고 눌러서 디테일 정보를 볼 수있는 모달창을 띄울 때 알맞은 정보가 띄워져야했다. __즉, hover 또는 클릭을 했을 때 해당 콘텐츠가 TV 시리즈인지 Movie 시리즈인지 구분하여 알맞은 Query 문을 찾아가야한다는 것.__   
 
-1) Hover 했을 경우
-2) Click 해서 모달 띄우기
+1) Hover 했을 경우   
+
+
+| <img src="https://user-images.githubusercontent.com/85853145/175816212-9884fa0c-5dd5-4f4b-bc23-5daacd71e16f.png" width="380" height="400"> | <img src="https://user-images.githubusercontent.com/85853145/175816395-3ba42405-4728-40d4-906c-186efd0c550a.png" width="380" height="400"> |
+| ------ | ------ |
+
+
 
 ## Publish / 배포 😌
 - 개인적인 API 키가 포함된 부분은 `dotenv`를 이용해서 `gitignore` 로 처리해준 뒤 깃허브페이지에 배포완료.!
