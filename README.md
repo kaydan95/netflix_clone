@@ -12,7 +12,8 @@
 
 
 ## For Start / 시작하기 전에
-    npm install react-router-dom@6
+    npm install
+<!--     npm install react-router-dom@6
     npm install --save styled-components
     npm i -D @types/styled-components
     npm install react-query
@@ -20,7 +21,7 @@
     npm install recoil
     npm install framer_motion
     npm install react-player
-    npm install react-responsive
+    npm install react-responsive -->
 
 ## Features / 최대한 똑같이 만들어보기위한 몸부림..!
 ### 1. Banner 
