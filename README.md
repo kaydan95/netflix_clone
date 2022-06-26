@@ -131,11 +131,130 @@ useEffect(() => {
 ### 2. Detail Modal
 - 해당 프로젝트에서 구현된 페이지는 애초에 TV 시리즈와 영화의 구분이 없이 한꺼번에 모든 정보를 볼 수 있도록 되어있는 곳이기 때문에 해당 박스에 hover 했을때, 그리고 눌러서 디테일 정보를 볼 수있는 모달창을 띄울 때 알맞은 정보가 띄워져야했다. __즉, hover 또는 클릭을 했을 때 해당 콘텐츠가 TV 시리즈인지 Movie 시리즈인지 구분하여 알맞은 Query 문을 찾아가야한다는 것.__   
 
-1) Hover 했을 경우   
+#### 1) Hover 했을 경우   
 
 
-| <img src="https://user-images.githubusercontent.com/85853145/175816212-9884fa0c-5dd5-4f4b-bc23-5daacd71e16f.png" width="380" height="400"> | <img src="https://user-images.githubusercontent.com/85853145/175816395-3ba42405-4728-40d4-906c-186efd0c550a.png" width="380" height="400"> |
+| <img src="https://user-images.githubusercontent.com/85853145/175816212-9884fa0c-5dd5-4f4b-bc23-5daacd71e16f.png" width="380" height="400"> | <img src="https://user-images.githubusercontent.com/85853145/175816395-3ba42405-4728-40d4-906c-186efd0c550a.png" width="380" height="400"> | <img src="https://user-images.githubusercontent.com/85853145/175816460-5f7aefe1-760e-4c3a-9403-9008855bba5e.png" width="380" height="400"> |
+| ------ | ------ | ----- |   
+
+해당 박스가 영화라면 왼쪽처럼 런타임을, TV 시리즈라면 총 시리즈 개수를 나타내고 싶었다.    
+
+가장 오른쪽 사진의 받아오는 데이터 api 의 내용을 살펴보면 모든 미디어 정보에 해당하는 고유 id 는 물론 media_type 도 명시되어 있었다.   
+
+1. 그래서 `framer-motion` 라이브러리의 한 기능인 `onHoverStart()` 를 이용한다.
+2. 고유 id 와 media_type 을 넘겨준다.
+3. media_type 이 “tv” 일 경우, 고유 id를 이용해 tvDetail 를, “movie” 일 경우, movieDetail 정보를 `useQuery()` 를 이용해 fetch 한다.
+4. 해당 정보를 적절히 배치해준다.   
+
+위에서 차례로 설명한 순서를 코드와 함께 보면 다음과 같다. 먼저 세 부분에 `useState()` 를 이용했다.
+
+해당 박스가 movie 인지 tv 시리즈인지 판별해줄 boolean 형과 tvID와 movieID 의 값을 변경해줄 용도!
+
+```tsx
+const [isMovie, setIsMovie] = useState(false);
+const [movieId, setMovieId] = useState(0);
+const [tvId, setTvId] = useState(0);
+```
+
+그리고 박스 부분에서는 아래처럼 `onHoverStart()` 를 이용해 id 와 media_type 를 넘겨주면 
+
+```tsx
+<BoxThumbnail
+    **onHoverStart={() => whenBoxHovered(trend.id!, trend.media_type!)}**  
+    onClick={()=> whenBoxClicked(trend.id!, trend.media_type!)}
+    bgphoto={makeImage(trend.backdrop_path, "w500")}>
+    <BoxTitle variants={boxTitleVars}>{trend.name || trend.title}</BoxTitle>
+</BoxThumbnail>
+```
+
+mediaType에 따라 구분한 뒤, 위의 `useState()` 를 이용해 영화인지 아닌지를 판별하고 id를 세팅한다.
+
+```tsx
+const whenBoxHovered = (Id : number, mediaType : string) => {
+    if(mediaType === "movie"){
+        setIsMovie(true);
+        setMovieId(Id);
+    } if(mediaType === "tv") {
+        setIsMovie(false);
+        setTvId(Id);
+    }
+}
+```
+
+그리고 `useQuery()` 를 이용해 데이터를 fetch 해오는 부분에서 받아 알맞은 데이터를 받아온 뒤
+
+```tsx
+const { data:trendingMovieDetail } = useQuery<IMovieDetail>(
+    ["trendingMovieDetail", movieId], () => GetMovieDetail(+movieId!)
+);
+
+const { data:trendingTvDetail } = useQuery<ITvDetail>(
+    ["trendingTvDetail", tvId], () => GetTvDetail(+tvId!)
+);
+```
+
+영화인지 아닌지를 판별했던 isMovie 에 따라 나타나는 정보가 다르게 나타나도록 세팅하면 끝..!
+
+```tsx
+<BoxInfo>
+  <LanguageTag>{isMovie ? (`${trendingMovieDetail?.original_language}`) : (`${trendingTvDetail?.original_language}`)}</LanguageTag>
+  {isMovie ? (
+      <span style={{margin : '0px 8px'}}>
+          {Math.floor(+`${trendingMovieDetail?.runtime}` / 60)}h {Math.floor(+`${trendingMovieDetail?.runtime}` % 60)}m
+      </span>
+  ) : (
+      <span style={{margin : '0px 8px', fontSize : '13px'}}>
+          {trendingTvDetail?.number_of_seasons} {trendingTvDetail?.number_of_seasons === 1 ? "Season" : "Seasons"}
+      </span>
+  )}
+  <StatusTag>{isMovie ? (`${trendingMovieDetail?.status}`) : (`${trendingTvDetail?.status}`)}</StatusTag>
+</BoxInfo>
+```
+
+영화 런타임은 `00h 00m` 형태로 나타내기 위해 `Math` 함수를 이용해서 맞췄고, tv 시리즈 개수는 해놓으니 단수, 복수냐가 신경쓰여서 *~~(괜히 언어를 영어로 해선..)~~* 시리즈가 1일 경우는 Season, 아니면 Seasons 로 나타나게 했다.
+
+
+#### 2) Click 해서 모달 띄우기
+
+
+| <img src="https://user-images.githubusercontent.com/85853145/175816968-094b3ce7-e10f-47f6-91c3-735be5f01c0c.png" width="650" height="400">| <img src="https://user-images.githubusercontent.com/85853145/175816985-0aa71d08-4825-4b1d-8906-d39cf6f3dbde.png" width="650" height="400"> |
 | ------ | ------ |
+
+
+클릭했을 경우도 `onHoverStart()` 거의 똑같은 원리로 작동한다.   
+`onClick={()=> whenBoxClicked(trend.id!, trend.media_type!)}` 으로 id 와 meida_type 을 넘겨주면
+
+```tsx
+const whenBoxClicked = (Id : number, mediaType : string) => {
+    if(mediaType === "movie"){
+        navigate(`/movies/${Id}`);
+    } if(mediaType === "tv") {
+        navigate(`/tv/${Id}`);
+    }
+};
+```
+모달은 `useMatch()` 를 이용해서 해당 id 를 뽑아내고 이를 이용해 필요한 data 를 불러온다.
+
+```tsx
+const moviePathMatch = useMatch("/movies/:movieId");
+const movieId = moviePathMatch?.params.movieId;
+
+const { data : MovieData } = useQuery<IMovieDetail>(
+    ["movieDetail", movieId], () => GetMovieDetail(+movieId!)
+);
+
+const { data : MovieCredit } = useQuery<IGetCredits>(
+    ["movieCredit", movieId], () => GetMovieCredits(+movieId!)
+);
+
+const { data : SimilarMovie } = useQuery<IGetMoviesResult>(
+    ["similarMovie", movieId], () => GetSimilarMovies(+movieId!)
+);
+```
+
+이 데이터를 적재적소에 배치하면 끝! 모달창 구성요소는 tv시리즈가 시즌 정보를 표시한다는 것을 제외하고는 모두 같다.    
+시즌 정보는 기본적인 썸네일 이미지와 제목, 방영 날짜, 그리고 대략적인 줄거리를 표시했다.
+
 
 
 
